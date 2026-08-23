@@ -152,6 +152,10 @@ body {
   text-align: left !important;
 }
 
+.dashboard-page h2.dashboard-title {
+  text-align: center !important;
+}
+
 .dashboard-page hr {
   border: 0;
   border-top: 1px solid #d6e3df;
@@ -228,6 +232,37 @@ body {
   transform: translateY(-1px);
 }
 
+.report-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0;
+  color: #607876;
+  font-size: 12px;
+}
+
+.sort-heading {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+}
+
+.sort-heading:hover {
+  color: #1e6b68;
+}
+
+.monthly-report-total {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  background: #cfe7df !important;
+  box-shadow: 0 -2px 0 #8eb7ae;
+}
+
 @media (max-width: 700px) {
   .dashboard-page {
     padding: 14px !important;
@@ -242,6 +277,40 @@ body {
     padding: 8px 10px;
     font-size: 12px;
   }
+
+  .report-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .summary-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .summary-toolbar input {
+    width: 100%;
+  }
+
+  .member-summary-table th:first-child,
+  .member-summary-table td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    min-width: 92px;
+    background: #f2f7f5;
+    box-shadow: 2px 0 5px rgba(33, 70, 68, 0.12);
+  }
+
+  .member-summary-table tbody tr:nth-child(even) td:first-child {
+    background: #eaf3f0;
+  }
+
+  .member-summary-table th:first-child {
+    z-index: 3;
+    background: #dceae6;
+  }
+
 }
 
 .plans-page,
@@ -478,6 +547,80 @@ body {
   grid-column: 1 / -1;
 }
 
+.member-loan-chart {
+  grid-column: 1 / -1;
+}
+
+.loan-chart-legend {
+  display: flex;
+  gap: 16px;
+  margin: -10px 0 18px;
+  color: #607876;
+  font-size: 11px;
+}
+
+.loan-chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.obtained-dot { background: #2b7775; }
+.paid-dot { background: #e4b65f; }
+
+.member-loan-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.member-loan-row + .member-loan-row {
+  margin-top: 14px;
+}
+
+.member-loan-name {
+  padding-top: 3px;
+  color: #294243;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.member-loan-bar-line {
+  display: grid;
+  grid-template-columns: 58px 1fr 82px;
+  align-items: center;
+  gap: 8px;
+  color: #78918d;
+  font-size: 10px;
+}
+
+.member-loan-bar-line + .member-loan-bar-line {
+  margin-top: 5px;
+}
+
+.member-loan-bar-line strong {
+  color: #41605f;
+  font-size: 10px;
+  text-align: right;
+}
+
+.member-loan-track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #e7f1ed;
+}
+
+.member-loan-bar {
+  height: 100%;
+  min-width: 2px;
+  border-radius: inherit;
+}
+
+.obtained-bar { background: #2b7775; }
+.paid-bar { background: #e4b65f; }
+
 .health-metrics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -633,6 +776,59 @@ body {
   color: #78918d;
   font-size: 9px;
 }
+
+.composition-chart {
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid #e1ece8;
+}
+
+.composition-chart-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 11px;
+  color: #41605f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.composition-chart-title small {
+  color: #78918d;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.composition-bar-row {
+  display: grid;
+  grid-template-columns: 68px 1fr auto;
+  align-items: center;
+  gap: 7px;
+  margin-top: 8px;
+  color: #607876;
+  font-size: 10px;
+}
+
+.composition-bar-row strong {
+  color: #41605f;
+  font-size: 10px;
+}
+
+.composition-bar-track {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #e7f1ed;
+}
+
+.composition-bar {
+  height: 100%;
+  min-width: 2px;
+  border-radius: inherit;
+}
+
+.issued-bar { background: #2b7775; }
+.collected-bar { background: #e4b65f; }
+.outstanding-bar { background: #d47d6f; }
 
 .legend p {
   display: grid;
@@ -825,6 +1021,15 @@ body {
     grid-column: auto;
   }
 
+  .member-loan-chart {
+    grid-column: auto;
+  }
+
+  .member-loan-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
   .health-metrics {
     grid-template-columns: 1fr;
   }
@@ -843,4 +1048,25 @@ body {
   .column-item small {
     font-size: 8px;
   }
+}
+
+.summary-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+  color: #607876;
+  font-size: 12px;
+}
+
+.summary-toolbar input {
+  width: min(280px, 100%);
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #b9cfca;
+  border-radius: 8px;
+  background: #fff;
+  color: #263238;
+  font: inherit;
 }

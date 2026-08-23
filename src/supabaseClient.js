@@ -1,6 +1,14 @@
 import { createClient } from "@supabase/supabase-js";
  
-const supabaseUrl = "https://eeyhumcgqcshzasaeqpu.supabase.co";
-const supabaseKey = "sb_publishable_zA-xlz0i-jmg2YAToSwqcg_VIyo4txl";
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error(
+    "Missing Supabase config. Make sure VITE_SUPABASE_URL and " +
+      "VITE_SUPABASE_ANON_KEY are set in your .env file (local dev) " +
+      "or in your Netlify site's environment variables (deployed)."
+  );
+}
  
 export const supabase = createClient(supabaseUrl, supabaseKey);

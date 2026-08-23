@@ -25,11 +25,10 @@ export default function Login() {
  
   // ✅ GOOGLE LOGIN
   const signInWithGoogle = async () => {
-    const redirectUrl =
-      window.location.hostname === "localhost" ||
-      window.location.hostname === "127.0.0.1"
-        ? window.location.origin
-        : "https://nicesavings.netlify.app/";
+    // Always redirect back to wherever the app is actually running
+    // (localhost, a Netlify deploy preview, or production) instead
+    // of hardcoding one production URL.
+    const redirectUrl = window.location.origin;
 
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
