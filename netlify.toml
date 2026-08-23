@@ -1,3 +1,11 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+  # These two are meant to be public — VITE_ vars are inlined into
+  # the client bundle by design, and VITE_SUPABASE_ANON_KEY is a
+  # publishable/anon key (safe to expose in a browser), not a secret.
+  # Without this, Netlify's secrets scanner blocks the build every
+  # time it finds them in the built JS output.
+  [build.environment]
+    SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY"
